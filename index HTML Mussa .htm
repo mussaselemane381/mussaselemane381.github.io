@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frases para Status: bom dia, amor, fé e motivação</title>
+<meta name="description" content="Frases curtas em português para o teu Status do WhatsApp. Copia ou envia com um toque.">
+<style>
+:root{--ink:#14183A;--paper:#F2F4F9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{max-width:640px;margin:0 auto;padding:22px 16px 6px}
+h1{font:700 1.7rem/1.15 Georgia,"Times New Roman",serif;margin:0 0 6px}
+header p{margin:0;color:#4a5070}
+nav{position:sticky;top:0;z-index:2;background:var(--paper);padding:10px 0}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 16px;max-width:640px;margin:0 auto;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:2px solid var(--ink);background:transparent;color:var(--ink);padding:8px 14px;border-radius:999px;font:600 .9rem system-ui,sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff}
+main{max-width:640px;margin:0 auto;padding:6px 16px 36px}
+h2{font:700 .95rem system-ui,sans-serif;margin:14px 0 8px}
+.tile{background:var(--bg);color:var(--fg);border-radius:20px;padding:22px 20px 16px;margin:0 0 14px}
+.tile .cat{margin:0 0 10px;font-size:.85rem;opacity:.85}
+.tile .phrase{margin:0 0 18px;font:600 1.25rem/1.4 Georgia,"Times New Roman",serif}
+.tile.today .phrase{font-size:1.5rem}
+.actions{display:flex;gap:8px}
+.btn{flex:1;min-height:46px;border-radius:12px;border:2px solid currentColor;background:transparent;color:inherit;font:600 .95rem system-ui,sans-serif;cursor:pointer}
+.btn.main{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.btn:focus-visible,.chip:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.c-bomdia{--bg:#FFC21A;--fg:#14183A}
+.c-boanoite{--bg:#1E2A78;--fg:#fff}
+.c-motivacao{--bg:#0B7A5E;--fg:#fff}
+.c-amor{--bg:#C42A68;--fg:#fff}
+.c-fe{--bg:#5B3FA8;--fg:#fff}
+.c-amizade{--bg:#1B62DB;--fg:#fff}
+.ad{margin:0 0 14px}
+.ad:empty{display:none}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+footer{max-width:640px;margin:0 auto;padding:0 16px 32px;color:#4a5070;font-size:.85rem}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Frases para Status</h1>
+  <p>Escolhe uma frase, copia ou envia no WhatsApp com um toque.</p>
+</header>
+<nav aria-label="Categorias"><div class="chips" id="chips"></div></nav>
+<main>
+  <h2>Frase do dia</h2>
+  <div id="today"></div>
+  <!-- ANÚNCIO TOPO: cola aqui o código da rede de anúncios dentro deste aside -->
+  <aside class="ad" id="ad-topo" aria-label="Publicidade"></aside>
+  <h2 id="listTitle">Todas as frases</h2>
+  <div id="list"></div>
+</main>
+<footer>
+  <!-- Adiciona aqui o link para a página de Política de Privacidade (as redes de anúncios pedem). -->
+  <p>Frases originais. Podes copiar e partilhar à vontade.</p>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+var N={bomdia:"Bom dia",boanoite:"Boa noite",motivacao:"Motivação",amor:"Amor",fe:"Fé",amizade:"Amizade"};
+var D=[
+["bomdia","Bom dia ☀️ Que hoje o teu esforço encontre portas abertas."],
+["bomdia","Acordaste com mais uma chance. Usa-a bem. 🌅"],
+["bomdia","Bom dia! Começa o dia com gratidão e termina com orgulho. 🙏"],
+["bomdia","Hoje não precisas de ser perfeito, só de dar o próximo passo. 👣"],
+["bomdia","Que a manhã te traga calma e o dia te traga boas notícias. ☀️"],
+["bomdia","O café arrefece, a oportunidade não espera. Bom dia! ☕"],
+["bomdia","Bom dia a quem trabalha desde cedo para chegar mais longe. 💪"],
+["bomdia","Respira fundo. O dia ainda é teu para escrever. ✨"],
+["bomdia","Que nenhuma pressa te roube a paz desta manhã. 🌿"],
+["bomdia","Bom dia! Sorri primeiro, o dia acompanha. 😊"],
+["bomdia","Cada amanhecer é uma resposta às tuas orações. 🌄"],
+["bomdia","Levanta-te com fé, que Deus já foi à frente. 🙌"],
+["bomdia","Bom dia, guerreiro. Mais um dia para vencer o de ontem. 🔥"],
+["bomdia","Que hoje a vida te surpreenda pelo lado bom. 🍀"],
+["bomdia","Dia novo, cabeça leve, coração em paz. Bom dia! 🌞"],
+["boanoite","Boa noite 🌙 Hoje foi o que foi. Amanhã podes fazer melhor."],
+["boanoite","Descansa. Quem cuida do corpo hoje tem força amanhã. 😴"],
+["boanoite","Que a noite te traga sono tranquilo e sonhos leves. ✨"],
+["boanoite","Fizeste o possível hoje, e isso é suficiente. Boa noite! 🌌"],
+["boanoite","Deixa as preocupações lá fora e entra de coração leve. 🌙"],
+["boanoite","Boa noite a quem chegou cansado, mas não desistiu. 💙"],
+["boanoite","Agradece o dia que passou e confia no que vem. 🙏"],
+["boanoite","Que Deus guarde o teu sono e renove as tuas forças. 🌠"],
+["boanoite","Hoje o mundo pode ter pesado, mas amanhã há outro começo. 🌅"],
+["boanoite","Boa noite. Que o silêncio desta hora te devolva a paz. 🌃"],
+["boanoite","Dorme sem culpa: o que ficou por fazer, amanhã faz-se. 🛌"],
+["boanoite","Que cada estrela lá em cima te lembre que não estás sozinho. ⭐"],
+["boanoite","Fecha o dia com calma e abre o amanhã com esperança. 🌙"],
+["boanoite","Boa noite a quem ama em silêncio e luta sem plateia. 💫"],
+["boanoite","Que a noite seja de descanso e o amanhã de recomeço. 😌"],
+["motivacao","Não desistas agora. O cansaço passa, o arrependimento fica. 💪"],
+["motivacao","Cada passo pequeno é progresso, mesmo que ninguém veja. 👣"],
+["motivacao","Quem tem um porquê forte aguenta quase qualquer como. 🔥"],
+["motivacao","Não esperes motivação. Cria disciplina e a motivação vem atrás. 🎯"],
+["motivacao","O teu único concorrente é quem eras ontem. 📈"],
+["motivacao","Falhar não é cair, é aprender a levantar com mais jeito. 🌱"],
+["motivacao","Sonha grande, começa pequeno, mas começa hoje. 🚀"],
+["motivacao","Quem trabalha em silêncio constrói o que o barulho não compra. 🤫"],
+["motivacao","Há dias de lutar e dias de resistir. Os dois contam. 🛡️"],
+["motivacao","Não percas o foco por quem não vai contigo até ao fim. 🎯"],
+["motivacao","O sucesso demora, mas quem insiste chega. ⏳"],
+["motivacao","O que hoje te cansa vai ser a tua história de vitória. 🏆"],
+["motivacao","Não precisas de ver o caminho todo, só o próximo passo. 🧭"],
+["motivacao","Acredita no teu processo, mesmo quando ninguém acredita. 🙌"],
+["motivacao","Pequenas atitudes repetidas todos os dias mudam uma vida. 🔁"],
+["amor","Contigo, até o dia mais comprido passa depressa. ❤️"],
+["amor","Amar é escolher a mesma pessoa todos os dias. 💞"],
+["amor","O teu abraço é o meu sítio favorito. 🤗"],
+["amor","Não preciso de muito. Preciso de ti. 💕"],
+["amor","Quando sorris, o resto do mundo desfoca. 😍"],
+["amor","Amor de verdade é paz, não é confusão. 🕊️"],
+["amor","Ficas bem em qualquer lugar da minha vida. 💖"],
+["amor","Obrigado por me amares nos dias em que eu nem me aguento. 🥹"],
+["amor","Contigo aprendi que casa não é lugar, é pessoa. 🏠"],
+["amor","O amor não grita. Fica, cuida e permanece. 🌹"],
+["amor","Se for contigo, eu vou. Sem mapa e sem pressa. 💫"],
+["amor","Tu és a melhor parte dos meus dias. ☀️"],
+["amor","Amar também é respeitar o tempo e o espaço do outro. 🤝"],
+["amor","Que o nosso amor seja sempre mais forte que o orgulho. 💪"],
+["amor","Penso em ti mais vezes do que consigo contar. 💭"],
+["fe","Confia no tempo de Deus. Ele nunca chega tarde. 🙏"],
+["fe","Quando já não tens forças, a fé segura por ti. ✝️"],
+["fe","Entrega o que te pesa e caminha mais leve. 🕊️"],
+["fe","Deus não te trouxe até aqui para te deixar a meio. 🙌"],
+["fe","Agradece primeiro. A gratidão abre mais portas do que a queixa. 🙏"],
+["fe","O que é teu chega, mesmo que demore. 🌿"],
+["fe","Mesmo no vale mais escuro, Deus caminha contigo. 🌄"],
+["fe","Reza, confia e age. A fé também trabalha. 💫"],
+["fe","Que Deus te proteja onde os teus olhos não alcançam. 🛡️"],
+["fe","Nem tudo o que Deus adia é negado. Muitas vezes é preparado. ⏳"],
+["fe","A paz que Deus dá não depende das circunstâncias. 🕊️"],
+["fe","Hoje agradeço pelo que tenho e pelo que ainda vem. 🙏"],
+["fe","A fé não elimina a luta, mas dá força para a vencer. 🔥"],
+["fe","Quem pôs a semente também sabe o tempo da colheita. 🌾"],
+["fe","Que a tua fé seja maior que o teu medo. ✨"],
+["amizade","Amigo de verdade não precisa de plateia para estar presente. 🤝"],
+["amizade","Poucos amigos, bons amigos. Chega e sobra. 💙"],
+["amizade","Obrigado por ficares quando era mais fácil ir embora. 🙏"],
+["amizade","Amizade é rir juntos e ficar calados sem desconforto. 😊"],
+["amizade","Quem te diz a verdade com carinho é amigo para a vida. 💬"],
+["amizade","Há pessoas que são casa. Tu és uma delas. 🏡"],
+["amizade","Amigo é quem torce por ti mesmo quando estás a ganhar. 🏆"],
+["amizade","Alguns encontros são acaso. Os amigos são presente. 🎁"],
+["amizade","A distância não apaga uma amizade verdadeira. 📱"],
+["amizade","Aos amigos que ficaram nos dias difíceis: obrigado. 🫶"],
+["amizade","Boas amizades não cobram, não comparam, não competem. ✨"],
+["amizade","Um amigo ouve o que dizes e entende o que calas. 🤍"],
+["amizade","Com amigos assim, até os problemas pesam menos. 😄"],
+["amizade","Cuida de quem cuida de ti. É assim que uma amizade dura. 🌱"],
+["amizade","Amigo não é quem aparece sempre, é quem aparece quando importa. 🤝"]
+];
+var cat="todas";
+function tile(i,extra){var d=D[i];return '<article class="tile c-'+d[0]+(extra||"")+'"><p class="cat">'+N[d[0]]+'</p><p class="phrase">'+d[1]+'</p><div class="actions"><button class="btn main" data-a="wa" data-i="'+i+'">Enviar no WhatsApp</button><button class="btn" data-a="copy" data-i="'+i+'">Copiar</button></div></article>'}
+function chips(){var h='<button class="chip" data-c="todas" aria-pressed="'+(cat==="todas")+'">Todas</button>';for(var k in N){h+='<button class="chip" data-c="'+k+'" aria-pressed="'+(cat===k)+'">'+N[k]+'</button>'}document.getElementById("chips").innerHTML=h}
+function list(){var h="",n=0;for(var i=0;i<D.length;i++){if(cat!=="todas"&&D[i][0]!==cat)continue;h+=tile(i);n++;
+/* ANÚNCIO NO MEIO: cola o código da rede dentro destes aside */
+if(n%5===0)h+='<aside class="ad" aria-label="Publicidade"></aside>'}
+document.getElementById("list").innerHTML=h;
+document.getElementById("listTitle").textContent=cat==="todas"?"Todas as frases":"Frases de "+N[cat].toLowerCase()}
+function init(){chips();list();document.getElementById("today").innerHTML=tile(Math.floor(Date.now()/864e5)%D.length," today")}
+function toast(m){var t=document.getElementById("toast");t.textContent=m;t.className="toast show";clearTimeout(toast.t);toast.t=setTimeout(function(){t.className="toast"},1800)}
+function text(i){return D[i][1]}
+function copy(s){if(navigator.clipboard&&window.isSecureContext){return navigator.clipboard.writeText(s)}return new Promise(function(ok,no){var a=document.createElement("textarea");a.value=s;document.body.appendChild(a);a.select();try{document.execCommand("copy")?ok():no()}catch(e){no()}document.body.removeChild(a)})}
+document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;
+if(b.dataset.c){cat=b.dataset.c;chips();list();return}
+var i=b.dataset.i;if(i===undefined)return;
+if(b.dataset.a==="copy"){copy(text(i)).then(function(){toast("Copiado")},function(){toast("Não foi possível copiar")})}
+else{window.open("https://wa.me/?text="+encodeURIComponent(text(i)),"_blank")}});
+init();
+</script>
+</body>
+</html>
